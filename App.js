@@ -1,21 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import{Ionicons}from "@expo/vector-icons"
+import React from "react";
+import MovieListScreen from "./src/screens/MovieListScreen";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome } from '@expo/vector-icons'; 
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons'; 
+
+const Menu = createBottomTabNavigator ( ) ; 
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+   return( 
+   <NavigationContainer>
+    <Menu.Navigator 
+    initialRouteName="Inicio"
+    activeColor="pink"
+    shifting={true}
+    style={{backgroundColor: '#0000'}}
+    >
+    <Menu.Screen name="Inicio" options={{tabBarIcon:({color})=>(<FontAwesome name="home" size={24} color={color } />)}}component={MovieListScreen} />
+    <Menu.Screen name="Peliculas"options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="movie-open" size={24}color={color } />)}} component={MovieListScreen} />
+    <Menu.Screen name="personajes" options={{tabBarIcon:({color})=>(<MaterialIcons name="person-pin" size={24} color={color } />)}}component={MovieListScreen} />
+  </Menu.Navigator>
+  </NavigationContainer>
+   );
+    
+};
