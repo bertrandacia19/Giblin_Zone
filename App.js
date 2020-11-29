@@ -1,7 +1,7 @@
 
 import React from "react";
 import{Ionicons}from "@expo/vector-icons"
-import MovieListScreen from "./crs/MovieListScreen";
+import MovieListScreen from "./crs/screens/MovieListScreen";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons'; 
 import 'react-native-gesture-handler';
