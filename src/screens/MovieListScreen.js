@@ -9,7 +9,7 @@ import { Feather } from '@expo/vector-icons';
 
 const {width, height} = Dimensions.get("window");
 
-
+//pantalla de inicio
 const MovieListScreen = () =>{
     return (
 
@@ -26,7 +26,7 @@ const MovieListScreen = () =>{
            </Header>
 
          <Image 
-           source = {require("../assets/logo.png")} 
+           source = {require("../../assets/logo.png")} 
            style={styles.Zone}
            /> 
            
@@ -35,7 +35,7 @@ const MovieListScreen = () =>{
     );
 };
 
-
+//hoja de estilos
 const styles = StyleSheet.create({
     container: {
         flex : 1,
@@ -45,11 +45,12 @@ const styles = StyleSheet.create({
     },
     input: {
         margin: 15,
+        backgroundColor:'#E58C8A',
     },
 
     Zone: {
        width: width ,
-       height: height * 0.20,
+       height: height * 0.13,
        resizeMode: "cover",
     },
 });
