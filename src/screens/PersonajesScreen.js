@@ -1,45 +1,16 @@
 //importación de los modulos necesarios
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { StyleSheet, Text, Image, Dimensions} from "react-native"; 
-import { Container, Input, Form, Icon, Item, Button, Header, H1,} from "native-base";
+import { Container, Input, Form, Icon, Item, Button, Header, H1} from "native-base";
 import { Feather } from '@expo/vector-icons';
-import backend from "../api/backend";
-import getEnvVars from "../../enviroment";
 
-const { apiUrl} = getEnvVars();
-//obtener los valores 
+
+
+
 const {width, height} = Dimensions.get("window");
 
-//pantalla que contiene la variables de rnderizar
-const MovieListScreen = () =>{
-
-    //maneja el estado de las peliculas
-    const[movies,setMovies]=useState(null);
-    const[Error,setError]=useState(false);
-    //promesas y asincronia
-    
-    const getMovies=async() =>{
-        try{
-            //consultar la API de glibinzone
-            const response =await backend.get( 'films ');
-            setMovies(response.data);
-            console.log(response.data)
-        }catch(error){
-            //error al moment
-           setError(true);
-        }
-    }
-getMovies();
-
-
-
-
-
-
-
-
-
-
+//pantalla de inicio
+const PersonajesScreen = () =>{
     return (
 
         <Container>
@@ -58,9 +29,9 @@ getMovies();
            source = {require("../../assets/logo.png")} 
            style={styles.Zone}
            /> 
-          
+           
         </Container>
-    
+        
     );
 };
 
@@ -84,4 +55,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MovieListScreen;
+export default PersonajesScreen;
