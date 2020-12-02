@@ -3,6 +3,7 @@ import React from "react";
 import{Ionicons}from "@expo/vector-icons"
 import MovieListScreen from "./src/screens/MovieListScreen";
 import PersonajesScreen from "./src/screens/PersonajesScreen";
+import LocalizacionScreen from "./src/screens/LocalizacionScreen";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons'; 
 import 'react-native-gesture-handler';
@@ -17,13 +18,18 @@ export default function App() {
    <NavigationContainer>
     <Menu.Navigator 
     initialRouteName="Inicio"
-    activeColor="pink"
-    shifting={true}
-    style={{backgroundColor: '#000000'}}
+    activeColor="#fff"
+   
     >
-    <Menu.Screen name="Inicio" options={{tabBarColor:'#ff7987' ,tabBarIcon:({color})=>(<FontAwesome name="home" size={24} color={color } />)}}component={MovieListScreen} />
-    <Menu.Screen name="Peliculas"options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="movie-open" size={24}color={color } />)}} component={MovieListScreen} />
+    <Menu.Screen name="Inicio"
+    component={MovieListScreen}
+     options={{ 
+        tabBarColor:'#009387' ,
+        tabBarLabel:' Inicio' ,
+     tabBarIcon:({color})=>(<FontAwesome name="home" size={26} color={color } />)}} />
     <Menu.Screen name="personajes" options={{tabBarIcon:({color})=>(<MaterialIcons name="person-pin" size={24} color={color } />)}}component={PersonajesScreen} />
+    <Menu.Screen name="Localizacion"options={{tabBarIcon:({color})=>(<MaterialCommunityIcons name="movie-open" size={24}color={color } />)}} component={LocalizacionScreen} />
+   
   </Menu.Navigator>
   </NavigationContainer>
    );
