@@ -7,6 +7,7 @@ import backend from "../api/backend";
 import getEnvVars from "../../enviroment";
 import { FlatList } from "react-native-gesture-handler";
 
+
 const { apiUrl} = getEnvVars();
 //obtener los valores 
 const {width, height} = Dimensions.get("window");
@@ -58,8 +59,8 @@ const MovieListScreen = () =>{
                     <Item>
                     
                      <Input inlineLabel placeholder = "Buscar"/>
-                        <Button icon >
-                          <Feather name="search" size={29} color="white" />
+                        <Button icon transparent >
+                          <Feather name="search" size={29} color="#FFA2A3" />
                         </Button>
                     </Item>
                </Header>
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     },
 
     header: {
-      backgroundColor: "#F2B7D4",
+      backgroundColor: "#FFA2A3",
     },
 });
 
