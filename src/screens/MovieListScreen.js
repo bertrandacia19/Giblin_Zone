@@ -1,7 +1,7 @@
 //importación de los modulos necesarios
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, Image, Dimensions} from "react-native"; 
-import { Container, Input, Form, Icon, Item, Button, Header, H1, View, Spinner, Card, CardItem, H3} from "native-base";
+import { Container, Input, Icon, Item, Button, Header, H1, View, Spinner, Card, CardItem, H3,Body} from "native-base";
 import { Feather } from '@expo/vector-icons';
 import backend from "../api/backend";
 import getEnvVars from "../../enviroment";
@@ -11,21 +11,22 @@ const { apiUrl} = getEnvVars();
 //obtener los valores 
 const {width, height} = Dimensions.get("window");
 
+
 //pantalla que contiene la variables de rnderizar
-const MovieListScreen = () =>{
+const MovieListScreen = ({ navigation }) =>{
 
     //maneja el estado de las peliculas
     const[Movies,setMovies]=useState(null);
-    const[Error,setError]=useState(false);
-    const[Search,setSearch] = useState("");
+    const[error,setError]=useState(false);
+    const[search,setSearch] = useState("");
     //promesas y asincronia
     
-    const getMovies=async() =>{
+    const getMoviesInfo=async() =>{
         try{
             //consultar la API de glibinzone
-            const response =await backend.get( 'films ');
+            const response =await backend.get( 'films');
             setMovies(response.data);
-            
+            //console.log(response.data)
         }catch(error){
             //error al moment
            setError(true);
@@ -34,33 +35,31 @@ const MovieListScreen = () =>{
 
 
     //Hook de efecto
-    useEffect(()=>{
-    //efecto secundario realizar peticion a la api
-    getMovies();
-    }, []);
+    useEffect(() => {
+        getMoviesInfo();
+      }, []);
 
 
 
 
-  if(!Movies){
-
-    return(
-        <View style={{flex : 1, justifyContent: "center"}}>
-           <Spinner color = "black" />
-        </View>  
-    )
-  }
+      if (!Movies) {
+        return(
+            <View style={{flex : 1, justifyContent: "center"}}>
+               <Spinner color = "pink" />
+            </View>  
+        )
+      }
 
 
 
     return (
 
             <Container>
-               <Header searchBar>
+              <Header searchBar style={styles.header} androidStatusBarColor="#004e64">
                     <Item>
                     
-                     <Input inlineLabel placeholder = "Buscar"/>
-                        <Button icon>
+                     <Input inlineLabel placeholder = "Buscar" value={search} onChangeText={setSearch} />
+                        <Button icon onPress={()=> {navigation.navigate("searchResults")}} >
                           <Feather name="search" size={29} color="white" />
                         </Button>
                     </Item>
@@ -68,35 +67,29 @@ const MovieListScreen = () =>{
                <Image
                 source = {require("../../assets/logo.png")} 
                 style={styles.Zone}
-     
-                   
                />
-                <H1 style={{marginTop: 30 }}>Extras populares</H1>
+                <H1 style={{marginTop: 30 }}>PELICULAS MAS POPULARES!</H1>
                 <FlatList
-                 data = {Movies.results}
-                 keyExtractor = {(Item) => Item.id}
+                data = {Movies}
+                 keyExtractor = {(item) => item.id}
                  ListEmptyComponent = {<Text>!No contiene niguna info</Text>}
-                 renderItem = {({Item })=>{
-                    return(
+                 renderItem = {({item })=>{
+                   return(
                      <View>
                         <Card>
                           <CardItem>
                             <Body>
-                             <H3>{Item.title} </H3>
-                             <Text>{Item.release_date} </Text>
+                             <H3>{item.title} </H3>
+                             <Text>{item.release_date} </Text>
+                             <Text>{item.description} </Text>
                             </Body>
                           </CardItem>
                         </Card>
                      </View>
-                    )
-                
-                
+    )
                 }}
-
                 />
-                
             </Container>
-        
     );
 };
 
@@ -117,6 +110,10 @@ const styles = StyleSheet.create({
        width: width ,
        height: height * 0.13,
        resizeMode: "cover",
+    },
+
+    header: {
+      backgroundColor: "#F2B7D4",
     },
 });
 
