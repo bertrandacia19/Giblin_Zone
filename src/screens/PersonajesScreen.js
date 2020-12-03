@@ -36,6 +36,7 @@ const PersonajesScreen= () =>{
     //Hook de efecto
     useEffect(() => {
         getMoviesInfo();
+        
       }, []);
 
 

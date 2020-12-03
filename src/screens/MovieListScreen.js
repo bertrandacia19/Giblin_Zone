@@ -7,13 +7,13 @@ import backend from "../api/backend";
 import getEnvVars from "../../enviroment";
 import { FlatList } from "react-native-gesture-handler";
 
-
 const { apiUrl} = getEnvVars();
 //obtener los valores 
 const {width, height} = Dimensions.get("window");
 
+
 //pantalla que contiene la variables de rnderizar
-const MovieListScreen = () =>{
+const MovieListScreen = ({ navigation }) =>{
 
     //maneja el estado de las peliculas
     const[Movies,setMovies]=useState(null);
@@ -26,7 +26,7 @@ const MovieListScreen = () =>{
             //consultar la API de glibinzone
             const response =await backend.get( 'films');
             setMovies(response.data);
-            console.log(response.data)
+            //console.log(response.data)
         }catch(error){
             //error al moment
            setError(true);
@@ -58,9 +58,9 @@ const MovieListScreen = () =>{
               <Header searchBar style={styles.header} androidStatusBarColor="#004e64">
                     <Item>
                     
-                     <Input inlineLabel placeholder = "Buscar"/>
-                        <Button icon transparent >
-                          <Feather name="search" size={29} color="#FFA2A3" />
+                     <Input inlineLabel placeholder = "Buscar" value={search} onChangeText={setSearch} />
+                        <Button icon transparent   onPress={()=> {navigation.navigate("searchResults")}} >
+                          <Feather name="search" size={29} color="#158ABA" />
                         </Button>
                     </Item>
                </Header>
@@ -68,7 +68,7 @@ const MovieListScreen = () =>{
                 source = {require("../../assets/logo.png")} 
                 style={styles.Zone}
                />
-                <H1 style={{marginTop: 30 }}>Peliculas</H1>
+                <H1 style={{marginTop: 30 }}>Peliculas!</H1>
                 <FlatList
                 data = {Movies}
                  keyExtractor = {(item) => item.id}
@@ -81,6 +81,7 @@ const MovieListScreen = () =>{
                             <Body>
                              <H3>{item.title} </H3>
                              <Text>{item.release_date} </Text>
+                             <Text>{item.description} </Text>
                             </Body>
                           </CardItem>
                         </Card>
