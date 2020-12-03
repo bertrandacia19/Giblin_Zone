@@ -13,7 +13,7 @@ const {width, height} = Dimensions.get("window");
 
 
 //pantalla que contiene la variables de rnderizar
-const MovieListScreen = ({ navigation }) =>{
+const MovieListScreen = ({}) =>{
 
     //maneja el estado de las peliculas
     const[Movies,setMovies]=useState(null);
@@ -58,8 +58,8 @@ const MovieListScreen = ({ navigation }) =>{
               <Header searchBar style={styles.header} androidStatusBarColor="#004e64">
                     <Item>
                     
-                     <Input inlineLabel placeholder = "Buscar" value={search} onChangeText={setSearch} />
-                        <Button icon transparent   onPress={()=> {navigation.navigate("searchResults")}} >
+                     <Input inlineLabel placeholder = "Buscar"  />
+                        <Button icon transparent >
                           <Feather name="search" size={29} color="#158ABA" />
                         </Button>
                     </Item>

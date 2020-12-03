@@ -7,6 +7,7 @@ import getEnvVars from "../../enviroment";
 import { FlatList } from "react-native-gesture-handler";
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 
+
 const { apiUrl} = getEnvVars();
 //obtener los valores 
 const {width, height} = Dimensions.get("window");
